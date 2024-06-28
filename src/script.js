@@ -3,7 +3,7 @@ let board = []; // 2d array
 const ROWS = 8;
 const COLUMNS = 8;
 
-const MINE_COUNT = 10;
+const MINE_COUNT = 5;
 var minesLocation = []; // 2d array
 
 let tilesClicked = 0; // goes up when tile clicked (goal is to click all tiles)
@@ -35,14 +35,27 @@ const BombCountToNumberImage = (bombCount) => {
 }
 
 const setMines = () => {
-    minesLocation.push("2-2");
-    minesLocation.push("2-3");
-    minesLocation.push("5-6");
-    minesLocation.push("3-4");
-    minesLocation.push("1-1");
+    let minesLeft = MINE_COUNT;
+
+    while (minesLeft > 0) {
+        let rndR = Math.floor(Math.random() * ROWS);
+        let rndC = Math.floor(Math.random() * COLUMNS);
+        
+        let randomId = `${rndR}-${rndC}`;
+        
+        if (!minesLocation.includes(randomId)) {
+            minesLocation.push(randomId);
+            minesLeft--;
+        }
+    }
 }
 
 const startGame = () => {
+    // hide context menu on right click over game-board
+    document.getElementById("game").addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
     setMines();
 
     for (let r = 0; r < ROWS; r++) {
@@ -50,7 +63,9 @@ const startGame = () => {
         for (let c = 0; c < COLUMNS; c++) {
             let tile = document.createElement("div");
             tile.id = r.toString() + '-' + c.toString();
+            tile.classList.add("Hidden");
             tile.addEventListener("click", clickTile);
+            tile.addEventListener("contextmenu", markTile);
             document.getElementById("board").append(tile);
             row.push(tile);
         }
@@ -60,12 +75,22 @@ const startGame = () => {
     console.log(board)
 }
 
+function markTile () 
+{
+    if (this.classList.contains("Hidden")) {
+        this.classList.toggle("Marked");
+    }
+}
+
 function clickTile () {
     if (gameOver || this.classList.contains("tile-clicked")) {
         return;
     }
 
+    this.classList.remove("Hidden");
+
     if (minesLocation.includes(this.id)) {
+        this.classList.add("TrippedBomb");
         gameOver = true;
         revealTiles();
         return;
@@ -84,6 +109,12 @@ const revealTiles = () => {
             let tile = board[r][c];
             if (minesLocation.includes(tile.id)){
                 document.getElementById(`${tile.id}`).classList.add("Bomb");
+                document.getElementById(`${tile.id}`).classList.remove("Hidden");
+            }
+            // Detect falsly marked tiles
+            if (tile.classList.contains("Marked") && !tile.classList.contains("Bomb")) {
+                tile.classList.add("FalseMarked");
+                tile.classList.remove("Makred");
             }
         }
     }
@@ -100,6 +131,9 @@ function checkMine(r, c) {
     let minesFound = 0;
 
     board[r][c].classList.add("tile-clicked");
+    board[r][c].classList.remove("Hidden");
+    board[r][c].classList.remove("Marked");
+
     tilesClicked++;
 
     minesFound += checkTile(r-1, c-1);
@@ -133,6 +167,7 @@ function checkMine(r, c) {
 
     if (tilesClicked == ROWS * COLUMNS - MINE_COUNT) {
         // alert("YOU WIN")
+        document.getElementById("board").style.pointerEvents = "none";
     }
 }
 
