@@ -24,9 +24,27 @@ main {
 }
 
 .utilities {
-    background-color: beige;
+    background-color: #e4dfdf;
     border: solid rgb(223, 223, 205) 1px;
     height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#restart {
+    width: 60px;
+    height: 60px;
+    background-image: url("../images/Smile.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#restart:hover {
+    border-top: solid #6a6a6a 7px;
+    border-left: solid #7a7a7a 7px;
+
 }
 
 #board {

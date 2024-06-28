@@ -3,7 +3,7 @@ let board = []; // 2d array
 const ROWS = 8;
 const COLUMNS = 8;
 
-const MINE_COUNT = 5;
+const MINE_COUNT = 8;
 var minesLocation = []; // 2d array
 
 let tilesClicked = 0; // goes up when tile clicked (goal is to click all tiles)
@@ -13,6 +13,10 @@ let gameOver = false;
 
 window.onload = () => {
     startGame();
+}
+
+document.getElementById("restart").onclick = () => {
+    location.reload();
 }
 
 const BombCountToNumberImage = (bombCount) => {
@@ -83,13 +87,14 @@ function markTile ()
 }
 
 function clickTile () {
-    if (gameOver || this.classList.contains("tile-clicked")) {
+    if (gameOver || this.classList.contains("tile-clicked") || this.classList.contains("Marked")) {
         return;
     }
 
     this.classList.remove("Hidden");
 
     if (minesLocation.includes(this.id)) {
+        document.getElementById("restart").style.backgroundImage = 'url("../images/Dead.png")';
         this.classList.add("TrippedBomb");
         gameOver = true;
         revealTiles();
@@ -165,9 +170,20 @@ function checkMine(r, c) {
         checkMine(r+1, c+1);    //bottom right
     }
 
+    // Win condition
     if (tilesClicked == ROWS * COLUMNS - MINE_COUNT) {
-        // alert("YOU WIN")
         document.getElementById("board").style.pointerEvents = "none";
+        document.getElementById("restart").style.backgroundImage = 'url("../images/Win.png")';
+        
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLUMNS; c++) {
+                let tile = board[r][c];
+                
+                if (minesLocation.includes(tile.id)) {
+                    tile.classList.add("Marked");
+                }
+            }
+        }
     }
 }
 
