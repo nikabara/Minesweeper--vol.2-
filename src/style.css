@@ -13,6 +13,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f3f3f3;
 }
 
 #game {
@@ -21,20 +22,43 @@ main {
     background-color: beige;
     display: flex;
     flex-direction: column;
+    border: solid #ffffff 10px;
+    border-radius: 8px;
 }
 
 .utilities {
-    background-color: #e4dfdf;
-    border: solid rgb(223, 223, 205) 1px;
+    background-color: #c8c8c8;
+    border: solid #c6c6c6 15px;
     height: 20%;
+}
+
+.utilities-inner {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    border: solid #808080 10px;
+    border-right: solid #ffffff 10px;
+    border-bottom: solid #ffffff 10px;
+}
+
+#bomb-count {
+    width: 97px;
+    height: 60px;
+    background-color: rgb(0, 0, 0);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 2px;
+}
+
+.bomb-count-digits {
+    border: solid black 1px;
 }
 
 #restart {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     background-image: url("../images/Smile.png");
     background-position: center;
     background-size: cover;
@@ -47,12 +71,20 @@ main {
 
 }
 
+.board-outter {
+    height: 80%;
+    border: solid #c6c6c6 15px;
+}
+
 #board {
     /* background-color: rgb(67, 106, 141); */
-    height: 80%;
+    height: 100%;
     display: grid;
     grid-template-rows: repeat(8, 1fr);
     grid-template-columns: repeat(8, 1fr);
+    border: solid #808080 10px;
+    border-right: solid #ffffff 10px;
+    border-bottom: solid #ffffff 10px;
 }
 
 #board > div {
@@ -147,4 +179,81 @@ main {
 
 .tile-clicked {
     background-color: #dbdbdb !important;
+}
+
+.DigitalMinus {
+    background-image: url("https://minesweeper.online/img/skins/hd/d-.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalZero {
+    background-image: url("https://minesweeper.online/img/skins/hd/d0.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalOne {
+    background-image: url("https://minesweeper.online/img/skins/hd/d1.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalTwo {
+    background-image: url("https://minesweeper.online/img/skins/hd/d2.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalThree {
+    background-image: url("https://minesweeper.online/img/skins/hd/d3.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalFour {
+    background-image: url("https://minesweeper.online/img/skins/hd/d4.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalFive {
+    background-image: url("https://minesweeper.online/img/skins/hd/d5.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalSix {
+    background-image: url("https://minesweeper.online/img/skins/hd/d6.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalSeven {
+    background-image: url("https://minesweeper.online/img/skins/hd/d7.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalEight {
+    background-image: url("https://minesweeper.online/img/skins/hd/d8.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.DigitalNine {
+    background-image: url("https://minesweeper.online/img/skins/hd/d9.svg?v=14");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
