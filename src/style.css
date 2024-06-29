@@ -23,6 +23,8 @@ main {
     display: flex;
     flex-direction: column;
     border: solid #ffffff 10px;
+    border-right: solid #808080 10px;
+    border-bottom: solid #808080 10px;
     border-radius: 8px;
 }
 
